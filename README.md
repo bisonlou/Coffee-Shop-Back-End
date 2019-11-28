@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/bisonlou/Coffee_Shop_API.svg?branch=develop)](https://travis-ci.org/bisonlou/Coffee_Shop_API)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bad403a1ad5903bbab37/maintainability)](https://codeclimate.com/github/bisonlou/Coffee_Shop_API/maintainability)
 
 # Coffee Shop Backend
 
