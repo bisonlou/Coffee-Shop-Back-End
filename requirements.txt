@@ -9,7 +9,7 @@ colorama==0.4.1
 coverage==4.5.4
 coveralls==1.8.2
 docopt==0.6.2
-ecdsa==0.13.2
+ecdsa==0.13.3
 entrypoints==0.3
 flake8==3.7.9
 Flask==1.0.2
