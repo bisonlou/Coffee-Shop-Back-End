@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bisonlou/Coffee_Shop_API.svg?branch=develop)](https://travis-ci.org/bisonlou/Coffee_Shop_API)
+
 # Coffee Shop Backend
 
 ## Getting Started
