@@ -2,11 +2,67 @@ from api import app
 from flask import jsonify
 
 
-@app.route('/drinks')
+@app.route('/api/v1/drinks')
 def list_drinks():
     return jsonify({
-        'success': True
-    })
+        'success': True,
+        'drinks': [
+            {
+                'id': 1,
+                'title': 'matcha shake',
+                'recipe': [
+                    {
+                        'name': 'milk',
+                        'color': 'grey',
+                        'parts': 1
+                    },
+                    {
+                        'name': 'matcha',
+                        'color': 'green',
+                        'parts': 3
+                    },
+                ]
+            },
+            {
+                'id': 2,
+                'title': 'flatwhite',
+                'recipe': [
+
+                    {
+                        'name': 'milk',
+                        'color': 'grey',
+                        'parts': 3
+                    },
+                    {
+                        'name': 'coffee',
+                        'color': 'brown',
+                        'parts': 1
+                    },
+                ]
+            },
+            {
+                'id': 3,
+                'title': 'cap',
+                'recipe': [
+                    {
+                        'name': 'foam',
+                        'color': 'white',
+                        'parts': 1
+                    },
+                    {
+                        'name': 'milk',
+                        'color': 'grey',
+                        'parts': 2
+                    },
+                    {
+                        'name': 'coffee',
+                        'color': 'brown',
+                        'parts': 1
+                    },
+                ]
+            }
+        ]
+    }), 200
 
 
 '''
