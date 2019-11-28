@@ -1,0 +1,10 @@
+[report]
+omit = 
+    *.pyc
+    */venv/*
+    */home/travis/virtualenv/*
+    */usr/lib/python3/*
+    */__init__.py
+    tests/*
+    */models/
+    \Users\Bison\AppData\*
