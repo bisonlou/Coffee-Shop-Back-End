@@ -8,6 +8,6 @@ from .auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
 setup_db(app)
-CORS(app)
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 import api.controllers.drinks
