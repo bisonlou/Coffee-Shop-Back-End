@@ -2,36 +2,69 @@ from api import app
 from flask import jsonify
 
 
-'''
-Example error handling for unprocessable entity
-'''
 @app.errorhandler(422)
 def unprocessable(error):
-    return jsonify({
-        "success": False,
-        "error": 422,
-        "message": "unprocessable"
-    }), 422
+    return (
+        jsonify({"success": False, "error": 422, "message": "unprocessable"}),
+        422,
+    )
 
 
-'''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
-    each error handler should return (with approprate messages):
-             jsonify({
-                    "success": False, 
-                    "error": 404,
-                    "message": "resource not found"
-                    }), 404
-
-'''
-
-'''
-@TODO implement error handler for 404
-    error handler should conform to general task above 
-'''
+@app.errorhandler(400)
+def bad_data(error):
+    return (
+        jsonify({"success": False, "error": 400, "message": "bad data"}),
+        400,
+    )
 
 
-'''
-@TODO implement error handler for AuthError
-    error handler should conform to general task above 
-'''
+@app.errorhandler(404)
+def not_found(error):
+    return (
+        jsonify(
+            {"success": False, "error": 404, "message": "resource not found"}
+        ),
+        404,
+    )
+
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    return (
+        jsonify(
+            {"success": False, "error": 405, "message": "method not allowed"}
+        ),
+        405,
+    )
+
+
+@app.errorhandler(403)
+def unauthorized(error):
+    return (
+        jsonify({"success": False, "error": 403, "message": "unauthorized"}),
+        403,
+    )
+
+
+@app.errorhandler(401)
+def not_authenticated(error):
+    return (
+        jsonify(
+            {"success": False, "error": 401, "message": "not authenticated"}
+        ),
+        401,
+    )
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return (
+        jsonify(
+            {
+                "success": False,
+                "error": 500,
+                "message": "internal server error",
+            }
+        ),
+        500,
+    )
