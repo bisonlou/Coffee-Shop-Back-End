@@ -31,14 +31,15 @@ class Recipe(db.Model):
             "drink": self.drink_id,
         }
 
-    '''
+    """
     delete()
         deletes a new model into a database
         the model must exist in the database
         EXAMPLE
             drink = Drink(title=req_title, recipe=req_recipe)
             drink.delete()
-    '''
+    """
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
