@@ -165,3 +165,23 @@ def update_drinks(payload, drink_id):
     id is the id of the deleted record
         or appropriate status code indicating reason for failure
 """
+
+@app.route('/api/v1/drinks/<int:drink_id>', methods=['DELETE'])
+@requires_auth('delete:drinks')
+def delete_drink(payload, drink_id):
+    drink = Drink.query.get_or_404(drink_id, "drink not found")
+
+    error = False
+
+    try:
+        drink.delete()
+    except Exception:
+        print(sys.exc_info())
+        error = True
+        abort(422)
+
+    if not error:
+        return jsonify({
+            'success': True,
+            'delete': drink.id
+        })

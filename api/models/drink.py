@@ -12,7 +12,7 @@ class Drink(db.Model):
     __tablename__ = "drinks"
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     title = Column(String(80), nullable=False, unique=True)
-    recipe = db.relationship("Recipe", backref="drink")
+    recipe = db.relationship("Recipe", backref="drink", cascade="delete")
 
     """
     short()
