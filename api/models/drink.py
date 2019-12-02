@@ -12,7 +12,7 @@ class Drink(db.Model):
     __tablename__ = "drinks"
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     title = Column(String(80), nullable=False, unique=True)
-    recipe = db.relationship("Recipe", backref="drink", cascade="delete")
+    recipe = db.relationship("Recipe", backref="drink", cascade="all, delete-orphan")
 
     """
     short()
@@ -22,15 +22,16 @@ class Drink(db.Model):
     def short(self):
         return {"id": self.id, "title": self.title}
 
-    '''
+    """
     long()
         long form representation of the Drink model
-    '''
+    """
+
     def long(self):
         return {
-            'id': self.id,
-            'title': self.title,
-            'recipe': json.loads(self.recipe)
+            "id": self.id,
+            "title": self.title,
+            "recipe": json.loads(self.recipe),
         }
 
     """

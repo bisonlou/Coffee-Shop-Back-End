@@ -2,7 +2,7 @@ venv/
 .env
 __pycache__/
 .pytest_cache/
-__pycache__/
+*/__pycache__/
 .vscode/
 htmlcov/
 *.pyc

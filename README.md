@@ -1,8 +1,14 @@
+
+# COFFEE SHOP API Backend
+
 [![Build Status](https://travis-ci.org/bisonlou/Coffee-Shop-Back-End.svg?branch=develop)](https://travis-ci.org/bisonlou/Coffee-Shop-Back-End)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bad403a1ad5903bbab37/maintainability)](https://codeclimate.com/github/bisonlou/Coffee_Shop_API/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/bisonlou/Coffee-Shop-Back-End/badge.svg?branch=develop)](https://coveralls.io/github/bisonlou/Coffee-Shop-Back-End?branch=develop)
 
-# Coffee Shop Backend
+Welcome to the Coffee Shop backend API. This backend serves the Coffee Shop frontend with drink menus.
+Find the live backend hosted [here](https://coffee-shop-backend.herokuapp.com/api/v1)
+
+This backend was built following [PEP8](https://www.python.org/dev/peps/pep-0008/) standards.
 
 ## Getting Started
 
@@ -30,60 +36,254 @@ This will install all of the required packages we selected within the `requireme
 
 - [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
 
-- [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/) are libraries to handle the lightweight sqlite database. Since we want you to focus on auth, we handle the heavy lift for you in `./src/database/models.py`. We recommend skimming this code first so you know how to interface with the Drink model.
+- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py.
 
-- [jose](https://python-jose.readthedocs.io/en/latest/) JavaScript Object Signing and Encryption for JWTs. Useful for encoding, decoding, and verifying JWTS.
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server.
+
+## Database Setup
+
+The sqlite databases are provided in the database folder under the api
 
 ## Running the server
 
-From within the `./src` directory first ensure you are working using your created virtual environment.
+From within the `root` directory first ensure you are working using your created virtual environment.
 
-Each time you open a new terminal session, run:
-
-```bash
-export FLASK_APP=api.py;
-```
-
-To run the server, execute:
+To run the server, create a .env file.
 
 ```bash
-flask run --reload
+    touch .env
 ```
 
-The `--reload` flag will detect file changes and restart the server automatically.
+Inside the .env file, export your database URIs
 
-## Tasks
+```bash
+export AUTH0_DOMAIN='your Oauth domain name'
+export ALGORITHMS=['your Oauth algorithm']
+export API_AUDIENCE='your API audience'
+```
 
-### Setup Auth0
+Then excecute:
 
-1. Create a new Auth0 Account
-2. Select a unique tenant domain
-3. Create a new, single page web application
-4. Create a new API
-    - in API Settings:
-        - Enable RBAC
-        - Enable Add Permissions in the Access Token
-5. Create new API permissions:
-    - `get:drinks-detail`
-    - `post:drinks`
-    - `patch:drinks`
-    - `delete:drinks`
-6. Create new roles for:
-    - Barista
-        - can `get:drinks-detail`
-    - Manager
-        - can perform all actions
-7. Test your endpoints with [Postman](https://getpostman.com). 
-    - Register 2 users - assign the Barista role to one and Manager role to the other.
-    - Sign into each account and make note of the JWT.
-    - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
-    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
-    - Run the collection and correct any errors.
-    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
+```bash
+py app.py
+```
 
-### Implement The Server
+```bash
 
-There are `@TODO` comments throughout the `./backend/src`. We recommend tackling the files in order and from top to bottom:
+Endpoints
+GET 'api/v1/drinks'
+GET 'api/v1/drinks/<int:drink_id>'
+POST 'api/v1/drinks'
+PATCH '/api/v1/drinks/<int:drink_id>'
+DELETE '/api/v1/drinks/<int:drink_id>'
+```
 
-1. `./src/auth/auth.py`
-2. `./src/api.py`
+```bash
+
+curl http://127.0.0.1:5000/api/v1/drinks
+
+- Fetches a list of drinks
+- Returns:
+{
+  "drinks": [
+    {
+      "id": 1,
+      "title": "capuchino"
+    },
+    {
+      "id": 2,
+      "title": "late"
+    },
+    {
+      "id": 3,
+      "title": "chilotte"
+    },
+    {
+      "id": 4,
+      "title": "spiced latte"
+    },
+  ]
+  "success": true
+}
+
+```
+
+```bash
+
+curl http://127.0.0.1:5000/api/v1/drinks/1 -H "Authorization: Bearer {{token}}"
+
+- Fetches drink details
+- Returns:
+{
+  "drinks": {
+    "id": 1,
+    "recipe": [
+      {
+        "color": "yellow",
+        "name": "milk",
+        "parts": "1"
+      },
+      {
+        "color": "brown",
+        "name": "water",
+        "parts": "2"
+      }
+    ],
+    "title": "capuchino"
+  },
+  "success": true
+}
+  ```
+
+```bash
+
+curl -X DELETE http://127.0.0.1:5000/api/v1/drinks/20 -H "Authorization: Bearer {{token}}"
+
+- Deletes a drink
+- Returns:
+{
+    "delete": 20,
+    "success": true
+}
+```
+
+```bash
+
+curl  http://127.0.0.1:5000/api/v1/drinks -X POST
+-H "Content-Type: application/json" 
+-H "Authorization: Bearer {{token}}" 
+-d '{"title": "Capuchino7","recipes": [{"name":      "milk", "color":"cream", "parts": 3},              {"name":"coffee", color":"brown", "parts": 1}]}'
+
+- Posts a drink
+- Returns:
+{
+    "drink": {
+        "id": 26,
+        "recipe": [
+            {
+                "color": "cream",
+                "name": "milk",
+                "parts": "3"
+            },
+            {
+                "color": "brown",
+                "name": "coffee",
+                "parts": "1"
+            }
+        ],
+        "title": "Capuchino7"
+    },
+    "success": true
+}
+```
+
+```bash
+
+curl  http://127.0.0.1:5000/api/v1/drinks/26
+-X PATCH
+-H "Content-Type: application/json"
+-H "Authorization: Bearer {{token}}"
+-d '{"title": "Capuchino7", "recipes": [{"name": "milk", "color":"cream", "parts": 3},
+{"name":"coffee", "color":"brown", "parts": 1}]
+}'
+
+- Updates a drink
+- Returns:
+{
+    "drink": {
+        "id": 26,
+        "recipe": [
+            {
+                "color": "cream",
+                "drink": 26,
+                "id": 35,
+                "name": "milk",
+                "parts": "3"
+            },
+            {
+                "color": "brown",
+                "drink": 26,
+                "id": 36,
+                "name": "coffee",
+                "parts": "1"
+            }
+        ],
+        "title": "Capuchino7"
+    },
+    "success": true
+}
+```
+
+```bash
+
+## Error Handling
+
+Errors are returned as JSON objects in the following format:
+
+```bash
+{
+    "success": False,
+    "error": 400,
+    "message": "bad request"
+}
+```
+
+The API will return five error types when requests fail:
+
+400: Bad Request
+
+```bash
+{
+    "success": False,
+    "error": 400,
+    "message": "bad request"
+}
+```
+
+404: Resource Not Found
+
+```bash
+{
+    "success": False,
+    "error": 404,
+    "message": "resource not found"
+}
+```
+
+405: Method Not Allowed
+
+```bash
+{
+    "success": False,
+    "error": 405,
+    "message": "method not allowed"
+}
+```
+
+422: Not Processable
+
+```bash
+{
+    "success": False,
+    "error": 422,
+    "message": "unable to process request"
+}
+```
+
+500: Internal Server Error
+
+```bash
+{
+    "success": False,
+    "error": 500,
+    "message": "internal server error"
+}
+```
+
+## Testing
+
+To run the tests, run
+
+```bash
+pytest
+```

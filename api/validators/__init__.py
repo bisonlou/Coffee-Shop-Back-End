@@ -27,26 +27,26 @@ def validate_drink(request):
         abort(400, "recipes cannot be empty")
 
     for recipe in recipes:
-        if 'name' not in recipe:
+        if "name" not in recipe:
             abort(400, "recipe name expected")
 
-        if recipe['name'] == "":
+        if recipe["name"] == "":
             abort(400, "recipe name cannot be empty")
 
-        if 'color' not in recipe:
+        if "color" not in recipe:
             abort(400, "recipe color expected")
 
-        if recipe['color'] == "":
+        if recipe["color"] == "":
             abort(400, "recipe color cannot be empty")
 
-        if 'parts' not in recipe:
+        if "parts" not in recipe:
             abort(400, "recipe parts expected")
 
-        if type(recipe['name']) is not str:
+        if type(recipe["name"]) is not str:
             abort(400, "recipe name must be of type string")
 
-        if type(recipe['color']) is not str:
+        if type(recipe["color"]) is not str:
             abort(400, "recipe color must be of type string")
 
-        if type(recipe['parts']) is not int:
+        if type(recipe["parts"]) is not int:
             abort(400, "recipe parts must be of type int")
