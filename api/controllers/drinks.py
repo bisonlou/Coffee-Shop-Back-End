@@ -5,17 +5,7 @@ from api.models.drink import Drink
 from api.auth import requires_auth
 from api.models.recipe import Recipe
 from flask import jsonify, abort, request
-
-
-"""
-@TODO implement endpoint
-    GET /drinks
-        it should be a public endpoint
-        it should contain only the drink.short() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where
-    drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-"""
+from api.validators import validate_drink
 
 
 @app.route("/api/v1/drinks")
@@ -27,29 +17,14 @@ def list_drinks():
                     }), 200
 
 
-"""
-@TODO implement endpoint
-    GET /drinks-detail
-        it should require the 'get:drinks-detail' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where
-    drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-"""
 @app.route('/api/v1/drinks-detail/<int:drink_id>')
 @requires_auth('get:drinks-detail')
 def retrieve_drink(payload, drink_id):
-    print(drink_id)
-    drink = Drink.query.get(drink_id)
+    drink = Drink.query.get_or_404(drink_id, "drink not found")
 
-    if not drink:
-        abort(404)
-
-    drinks = []
-    recipes = Recipe.query.filter(Recipe.drink_id == drink.id).all()
-
-    drinks.append(
-        {
+    return jsonify({
+        "success": True,
+        "drinks": {
             "id": drink.id,
             "title": drink.title,
             "recipe": [
@@ -58,70 +33,70 @@ def retrieve_drink(payload, drink_id):
                     "color": recipe.color,
                     "parts": recipe.parts,
                 }
-                for recipe in recipes
+                for recipe in drink
             ],
-        }
-    )
-
-    return jsonify({"success": True, "drinks": drinks}), 200
-
-
-"""
-@TODO implement endpoint
-    POST /drinks
-        it should create a new row in the drinks table
-        it should require the 'post:drinks' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drink} where
-    drink an array containing only the newly created drink
-        or appropriate status code indicating reason for failure
-"""
+        }}), 200
 
 
 @app.route("/api/v1/drinks", methods=["POST"])
 @requires_auth('post:drinks')
 def add_drinks(payload):
-    if not request.json:
-        abort(400)
+
+    validate_drink(request)
 
     title = request.json.get("title", None)
     recipes = request.json.get("recipes", None)
 
-    if title and recipes:
-        if Drink.query.filter(Drink.title == title).count() > 0:
-            return jsonify(
-                {
-                    "success": False,
-                    'message': 'drink already exists'
-                }
-            ), 200
+    if Drink.query.filter(Drink.title == title).count() > 0:
+        return jsonify(
+            {
+                "success": False,
+                'message': 'drink already exists'
+            }
+        ), 200
 
-        drink = Drink(title=title)
+    drink = Drink(title=title)
 
-        # add recipes to drink
-        for recipe in recipes:
-            recipe = Recipe(
-                name=recipe["name"],
-                color=recipe["color"],
-                parts=recipe["parts"],
-            )
+    # add recipes to drink
+    for recipe in recipes:
+        recipe = Recipe(
+            name=recipe["name"],
+            color=recipe["color"],
+            parts=recipe["parts"],
+        )
 
-            drink.recipe.append(recipe)
+        drink.recipe.append(recipe)
 
-        error = False
+    error = False
 
-        try:
-            drink.insert()
-        except Exception:
-            error = True
-            print(sys.exc_info())
-        finally:
-            db.session.close()
-
-        if not error:
-            return jsonify({"success": True}), 200
-
+    try:
+        drink_id = drink.insert()
+        print(drink_id)
+    except Exception:
+        error = True
+        print(sys.exc_info())
         abort(422)
+    finally:
+        db.session.close()
+
+    if not error:
+        drink = Drink.query.get_or_404(drink_id)
+
+        return jsonify({
+            "success": True,
+            "drink": {
+                "id": drink.id,
+                "title": drink.title,
+                "recipe": [
+                    {
+                        "name": recipe.name,
+                        "color": recipe.color,
+                        "parts": recipe.parts,
+                    }
+                    for recipe in drink.recipe
+                ],
+            }
+        }), 200
 
 
 """
@@ -136,6 +111,47 @@ def add_drinks(payload):
     drink an array containing only the updated drink
         or appropriate status code indicating reason for failure
 """
+@app.route('/api/v1/drinks/<int:drink_id>', methods=['PATCH'])
+@requires_auth('patch:drinks')
+def update_drinks(payload, drink_id):
+    validate_drink(request)
+
+    drink = Drink.query.get_or_404(drink_id)
+
+    title = request.json.get("title", None)
+    recipes = request.json.get("recipes", None)
+
+    error = False
+    try:
+        for recipe in drink.recipe:
+            recipe.delete()
+
+        drink.title = title
+
+        for recipe in recipes:
+            recipe = Recipe(
+                name=recipe["name"],
+                color=recipe["color"],
+                parts=recipe["parts"],
+            )
+
+            drink.recipe.append(recipe)
+
+        drink.update()
+    except Exception:
+        error = True
+        print(sys.exc_info())
+        abort(422)
+
+    if not error:
+        return jsonify({
+            'success': True,
+            'drink': {
+                'id': drink.id,
+                'title': drink.title,
+                'recipe': [recipe.short() for recipe in drink.recipe]
+            }
+        })
 
 
 """

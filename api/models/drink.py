@@ -22,6 +22,17 @@ class Drink(db.Model):
     def short(self):
         return {"id": self.id, "title": self.title}
 
+    '''
+    long()
+        long form representation of the Drink model
+    '''
+    def long(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'recipe': json.loads(self.recipe)
+        }
+
     """
     insert()
         inserts a new model into a database
@@ -35,6 +46,7 @@ class Drink(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
+        return self.id
 
     """
     delete()
