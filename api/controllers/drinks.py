@@ -20,28 +20,11 @@ from flask import jsonify, abort, request
 
 @app.route("/api/v1/drinks")
 def list_drinks():
-    drink_list = Drink.query.all()
+    drinks = Drink.query.all()
 
-    drinks = []
-    for drink in drink_list:
-        recipes = Recipe.query.filter(Recipe.drink_id == drink.id).all()
-
-        drinks.append(
-            {
-                "id": drink.id,
-                "title": drink.title,
-                "recipe": [
-                    {
-                        "name": recipe.name,
-                        "color": recipe.color,
-                        "parts": recipe.parts,
-                    }
-                    for recipe in recipes
-                ],
-            }
-        )
-
-    return jsonify({"success": True, "drinks": drinks}), 200
+    return jsonify({"success": True, "drinks": list(
+                    map(lambda drink: drink.short(), drinks))
+                    }), 200
 
 
 """
@@ -53,6 +36,34 @@ def list_drinks():
     drinks is the list of drinks
         or appropriate status code indicating reason for failure
 """
+@app.route('/api/v1/drinks-detail/<int:drink_id>')
+@requires_auth('get:drinks-detail')
+def retrieve_drink(payload, drink_id):
+    print(drink_id)
+    drink = Drink.query.get(drink_id)
+
+    if not drink:
+        abort(404)
+
+    drinks = []
+    recipes = Recipe.query.filter(Recipe.drink_id == drink.id).all()
+
+    drinks.append(
+        {
+            "id": drink.id,
+            "title": drink.title,
+            "recipe": [
+                {
+                    "name": recipe.name,
+                    "color": recipe.color,
+                    "parts": recipe.parts,
+                }
+                for recipe in recipes
+            ],
+        }
+    )
+
+    return jsonify({"success": True, "drinks": drinks}), 200
 
 
 """
