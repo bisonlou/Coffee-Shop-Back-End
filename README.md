@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/bisonlou/Coffee_Shop_API.svg?branch=develop)](https://travis-ci.org/bisonlou/Coffee_Shop_API)
+[![Build Status](https://travis-ci.org/bisonlou/Coffee-Shop-Back-End.svg?branch=develop)](https://travis-ci.org/bisonlou/Coffee-Shop-Back-End)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bad403a1ad5903bbab37/maintainability)](https://codeclimate.com/github/bisonlou/Coffee_Shop_API/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/bisonlou/Coffee_Shop_API/badge.svg)](https://coveralls.io/github/bisonlou/Coffee_Shop_API)
+[![Coverage Status](https://coveralls.io/repos/github/bisonlou/Coffee-Shop-Back-End/badge.svg?branch=develop)](https://coveralls.io/github/bisonlou/Coffee-Shop-Back-End?branch=develop)
 
 # Coffee Shop Backend
 

@@ -4,6 +4,7 @@ from api import app
 from api.models.drink import Drink
 from api.database import setup_db, db
 from api.models.recipe import Recipe
+from unittest.mock import patch
 
 
 class DrinkTestCase(unittest.TestCase):
@@ -20,6 +21,10 @@ class DrinkTestCase(unittest.TestCase):
 
     def tearDown(self):
         db.drop_all()
+
+    @patch('api.auth.requires_auth')
+    def mock_requres_auth(normal_argument, mock_class):
+        return 'mock payload'
 
     def test_add_drink(self):
         body = {
@@ -38,10 +43,10 @@ class DrinkTestCase(unittest.TestCase):
 
         data = response.get_json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(data["success"])
+        self.assertEqual(response.status_code, 401)
+        self.assertFalse(data["success"])
 
-    def test_add_drins_without_data(self):
+    def test_add_drinks_without_data(self):
         body = {}
 
         response = self.client().post(
@@ -50,7 +55,7 @@ class DrinkTestCase(unittest.TestCase):
             data=json.dumps(body),
         )
 
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 401)
 
     def test_get_drinks(self):
         response = self.client().get("/api/v1/drinks")

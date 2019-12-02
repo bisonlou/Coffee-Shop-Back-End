@@ -2,6 +2,7 @@ import sys
 from api import app
 from api.database import db
 from api.models.drink import Drink
+from api.auth import requires_auth
 from api.models.recipe import Recipe
 from flask import jsonify, abort, request
 
@@ -67,7 +68,8 @@ def list_drinks():
 
 
 @app.route("/api/v1/drinks", methods=["POST"])
-def add_drinks():
+@requires_auth('post:drinks')
+def add_drinks(payload):
     if not request.json:
         abort(400)
 
@@ -75,6 +77,14 @@ def add_drinks():
     recipes = request.json.get("recipes", None)
 
     if title and recipes:
+        if Drink.query.filter(Drink.title == title).count() > 0:
+            return jsonify(
+                {
+                    "success": False,
+                    'message': 'drink already exists'
+                }
+            ), 200
+
         drink = Drink(title=title)
 
         # add recipes to drink
