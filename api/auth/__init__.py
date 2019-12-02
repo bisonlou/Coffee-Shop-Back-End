@@ -1,13 +1,14 @@
 import json
-from flask import request, abort
-from functools import wraps
 from jose import jwt
+from os import environ
+from functools import wraps
+from flask import request, abort
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = "dev-ubz8mhel.auth0.com"
-ALGORITHMS = ["RS256"]
-API_AUDIENCE = "CoffeeShop"
+AUTH0_DOMAIN = environ['AUTH0_DOMAIN']
+ALGORITHMS = environ['ALGORITHMS']
+API_AUDIENCE = environ['API_AUDIENCE']
 
 # AuthError Exception
 """
