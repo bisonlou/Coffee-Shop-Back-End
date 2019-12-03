@@ -103,7 +103,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -150,7 +150,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -333,7 +333,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -390,7 +390,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -620,7 +620,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
+							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/drinks",
@@ -677,7 +677,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
+							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/drinks/1",
@@ -804,6 +804,7 @@
 		},
 		{
 			"id": "0fec8fcf-9ea2-408a-9b72-fac98b97fc17",
+
 			"key": "barrister_token",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56bEJOREE1TTBFeE1ETkJOVGRDTWtFeU9FRTVSREUzTkVGRlJFUTRRVVE1UWpBeE1VTkdPUSJ9.eyJpc3MiOiJodHRwczovL2Rldi11Yno4bWhlbC5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWRlNTE5YmY1NjM0YTAwZTJlZWE0ZTgyIiwiYXVkIjoiQ29mZmVlU2hvcCIsImlhdCI6MTU3NTQwNDg4MSwiZXhwIjoxNTc1NDEyMDgxLCJhenAiOiJ6Z0dZRnoyMjFJdjUyVW5uc2kwd0o1enhsRXduTUUxYiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.KrqHu61TcX5-8iEWzHalE4KXvzifHJotlp2W1KN6OgouvJTH2zvyKhCAsq88DmcOud8g4uQztMTXeY5O8zYx-C2hfBT_PkZDbiBlLJgB_dfzGUkgBSd8j95pBV4RoyDrMCWHAiTXwlytOBnAeDhwxs4uaurfUhdjuLv26jZxPL5lkLWxSdIuD75YftjjQA_vLD00U_7h1pw3ocK6OJhqqnZcNxY2iJrUWuBTDJ-HLjiYVNmGunzfskGAtKsvcK9rfH5HUQXHtYUMq_7qjSu76rITf8si-jnQ1DUpyVlTrjwtjjXGsmhKyKjIUDntnC9QlTiI9obWdyaKwXuEsVcXQg",
 			"type": "string"

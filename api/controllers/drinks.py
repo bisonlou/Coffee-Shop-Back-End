@@ -60,7 +60,7 @@ def add_drinks(payload):
     validate_drink(request)
 
     title = request.json.get("title", None)
-    recipes = request.json.get("recipes", None)
+    recipes = request.json.get("recipe", None)
 
     if Drink.query.filter(Drink.title == title).count() > 0:
         return (
@@ -130,7 +130,7 @@ def update_drinks(payload, drink_id):
 
         drink.title = title
         drink.update()
-        
+
     except Exception:
         error = True
         print(sys.exc_info())
@@ -162,7 +162,7 @@ def put_drinks(payload, drink_id):
     drink = Drink.query.get_or_404(drink_id)
 
     title = request.json.get("title", None)
-    recipes = request.json.get("recipes", None)
+    recipes = request.json.get("recipe", None)
 
     error = False
     try:
