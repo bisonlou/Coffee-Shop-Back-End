@@ -118,6 +118,45 @@ def update_drinks(payload, drink_id):
     updates a drink
     """
 
+    title = request.json.get('title', None)
+
+    if not title:
+        abort(400, "title required")
+
+    drink = Drink.query.get_or_404(drink_id)
+
+    error = False
+    try:
+
+        drink.title = title
+        drink.update()
+        
+    except Exception:
+        error = True
+        print(sys.exc_info())
+        abort(422)
+
+    if not error:
+        return jsonify(
+            {
+                "success": True,
+                "drinks": [
+                    {
+                        "id": drink.id,
+                        "title": drink.title,
+                        "recipe": [recipe.short() for recipe in drink.recipe],
+                    },
+                ]
+            }
+        )
+
+@app.route("/api/v1/drinks/<int:drink_id>", methods=["PUT"])
+@requires_auth("put:drinks")
+def put_drinks(payload, drink_id):
+    """
+    updates a entire drink
+    """
+
     validate_drink(request)
 
     drink = Drink.query.get_or_404(drink_id)
