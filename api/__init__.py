@@ -4,7 +4,7 @@ from api.database import setup_db
 
 app = Flask(__name__)
 setup_db(app)
-cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+CORS(app)
 
 import api.controllers.drinks
 import api.controllers.errors
