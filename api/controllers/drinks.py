@@ -26,33 +26,24 @@ def list_drinks():
     )
 
 
-@app.route("/api/v1/drinks-detail/<int:drink_id>")
+@app.route("/api/v1/drinks-detail")
 @requires_auth("get:drinks-detail")
-def retrieve_drink(payload, drink_id):
+def retrieve_drink(payload):
     """
-    returns the details of a single drink
+    returns the details of all drinks
     """
+    
+    formated_drinks = [drink.short() for drink in Drink.query.all()]
 
-    drink = Drink.query.get_or_404(drink_id, "drink not found")
+    for drink in formated_drinks:
+        drink['recipe'] = [recipe.short() for recipe in Recipe.query.filter(
+            Recipe.drink_id == drink['id']).all()]
 
     return (
         jsonify(
             {
                 "success": True,
-                "drinks": [
-                    {
-                        "id": drink.id,
-                        "title": drink.title,
-                        "recipe": [
-                            {
-                                "name": recipe.name,
-                                "color": recipe.color,
-                                "parts": recipe.parts,
-                            }
-                            for recipe in drink.recipe
-                        ],
-                    },
-                ]
+                "drinks": formated_drinks,
             }
         ),
         200,
