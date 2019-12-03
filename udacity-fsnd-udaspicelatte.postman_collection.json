@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,7 +151,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,7 +334,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -391,7 +391,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
+							"raw": "{\n\t\"title\": \"Capuchino\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -621,7 +621,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
+							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/drinks",
@@ -678,7 +678,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipes\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
+							"raw": "{\n\t\"title\": \"Capuchino7\",\n\t\"recipe\": [\n\t\t{\"name\": \"milk\", \"color\":\"cream\", \"parts\": 3},\n\t\t{\"name\":\"coffee\", \"color\":\"brown\", \"parts\": 1}\n\t\t]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/drinks/1",
@@ -798,19 +798,19 @@
 	],
 	"variable": [
 		{
-			"id": "9dd8e7ae-f9a7-4775-b47c-e3a96788b3d4",
+			"id": "e21afa7b-4fb2-462c-a143-5b2dd24dee12",
 			"key": "host",
 			"value": "https://coffee-shop-backend.herokuapp.com/api/v1",
 			"type": "string"
 		},
 		{
-			"id": "0d9c3c50-1606-4614-8b09-ddc6c644b4a3",
+			"id": "c8f4f245-69f5-42c9-8700-bb9b7773a122",
 			"key": "barrister_token",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56bEJOREE1TTBFeE1ETkJOVGRDTWtFeU9FRTVSREUzTkVGRlJFUTRRVVE1UWpBeE1VTkdPUSJ9.eyJpc3MiOiJodHRwczovL2Rldi11Yno4bWhlbC5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWRlNTE5YmY1NjM0YTAwZTJlZWE0ZTgyIiwiYXVkIjpbIkNvZmZlZVNob3AiLCJodHRwczovL2Rldi11Yno4bWhlbC5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNTc1MzU4NzEwLCJleHAiOjE1NzUzNjU5MTAsImF6cCI6InpnR1lGejIyMUl2NTJVbm5zaTB3SjV6eGxFd25NRTFiIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInBlcm1pc3Npb25zIjpbImdldDpkcmlua3MtZGV0YWlsIl19.JJ-0vE735U80FLkgHI_5wyuyLfDPyDOOivWN1jM2sIxyRcbmVKpP-pb4-jt0PpgzGnEl9__lUwWA8tuHxFEeThiCQQUeCgxEDkOBjGkF_KWuXAIcaPXIdk1VUGAvd7HLWBsTQsxEMFXpV9pzg_Ni_ran9PIxRp6D1Wh0COgyQA6hVOchAXPnqenrz76I5HkKrGUF4avTF00uKo8ZAofZTpVxmYmGwDOVU11ImLNAnHkNj3wPrOq4uhuR_7F38IumDJa__uOFXePNv2fYDYDnzQDmvcrTNINGeEWIklm6nBBQ9_9cajYb23LTllv9ErjWwuFN67Bahd2SBOaFRdyLWg",
 			"type": "string"
 		},
 		{
-			"id": "577c6d71-3b17-4d42-8dff-5fed36776d4f",
+			"id": "d20e2b13-a4ed-42f7-a726-338422abb29a",
 			"key": "manager_token",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik56bEJOREE1TTBFeE1ETkJOVGRDTWtFeU9FRTVSREUzTkVGRlJFUTRRVVE1UWpBeE1VTkdPUSJ9.eyJpc3MiOiJodHRwczovL2Rldi11Yno4bWhlbC5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTUzNzg2MzM5OTg2ODk5NDcyMDMiLCJhdWQiOlsiQ29mZmVlU2hvcCIsImh0dHBzOi8vZGV2LXViejhtaGVsLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1NzUzMDk4MTIsImV4cCI6MTU3NTMxNzAxMiwiYXpwIjoiemdHWUZ6MjIxSXY1MlVubnNpMHdKNXp4bEV3bk1FMWIiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmRyaW5rcyIsImdldDpkcmlua3MiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmRyaW5rcyIsInBvc3Q6ZHJpbmtzIiwicHV0OmRyaW5rcyJdfQ.NlPeNdJAMzm_fuWwD3RJu38OsIVJ4QCuGh9sH_Y5vqKamb1HZhzumOupG0XQcWKQUYdvCimJ5pRPm5GXn7YnEswwQ8z8NQn9vC6OI0bJ2gmhBCVMIA-24q8s-5eu6qOabj-FEy4TdK1gMHHoGp83LKFqXymorTr2QUi-oDTyqq1lytAidDc-wItKTXUmXLCzMQCz7w-aNIn_WqnUau3k3VM0TMTy9Bh5XTVxlmQx-O2wGCie30GLj4VLWgaJ_63cRfpnW-0EIZpeWta5Ff96ygUMhEf7671VEXqUi-m1R_xlPPB6Mfs9hZX4x2rDGDCGfIvrZFrO1vZuwSObYZ7sow",
 			"type": "string"

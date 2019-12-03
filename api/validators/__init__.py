@@ -6,7 +6,7 @@ def validate_drink(request):
         abort(400, "json data expected")
 
     title = request.json.get("title", None)
-    recipes = request.json.get("recipes", None)
+    recipes = request.json.get("recipe", None)
 
     if not title:
         abort(400, "drink title expected")
